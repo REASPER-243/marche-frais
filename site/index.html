@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f2">
+  <meta name="description" content="Une marketplace alimentaire de démonstration à Kinshasa : plusieurs vendeurs, un panier commun, des prix en francs congolais.">
+  <title>Marché Frais — Le marché de Kinshasa, en un panier</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="announcement"><span class="announcement-dot"></span> Projet de démonstration · Kinshasa · Prix en FC</div>
+
+  <header class="site-header">
+    <a class="brand" href="#accueil" aria-label="Marché Frais, accueil" data-view-link="store">
+      <span class="brand-mark">mf</span><span class="brand-copy"><strong>marché<span>frais</span></strong><small>LE MARCHÉ À PORTÉE DE MAIN</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <button class="nav-link active" type="button" data-view-link="store">Le marché</button>
+      <button class="nav-link" type="button" data-view-link="customer">Mon compte</button>
+      <button class="nav-link" type="button" data-view-link="seller">Espace vendeur</button>
+      <button class="nav-link" type="button" data-view-link="admin">Administration</button>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button account-button" type="button" id="open-account" aria-label="Ouvrir mon compte"><span class="person-icon">◎</span><span class="account-label">Mon compte</span></button>
+      <button class="cart-button" type="button" id="open-cart"><span class="cart-icon">▱</span><span>Mon panier</span><span class="cart-count" id="cart-count">0</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="view active" id="view-store" aria-labelledby="hero-title">
+      <div class="hero page-wrap" id="accueil">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> LES BONS PRODUITS, PRÈS DE CHEZ VOUS</p>
+          <h1 id="hero-title">Le marché de<br><em>Kinshasa,</em><br>dans un seul panier.</h1>
+          <p class="hero-intro">Fruits, poissons, viande et produits du pays. Choisissez vos vendeurs préférés et validez tout en une seule fois.</p>
+          <form class="search-box" id="search-form" role="search">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <label class="sr-only" for="search-input">Rechercher un produit ou un vendeur</label>
+            <input id="search-input" type="search" placeholder="Que recherchez-vous aujourd’hui ?" autocomplete="off">
+            <button type="submit">Rechercher</button>
+          </form>
+          <div class="hero-proof"><span class="proof-avatars" aria-hidden="true"><b>🍌</b><b>🐟</b><b>🥬</b></span><span><strong>Un panier commun</strong><br><small>Plusieurs boutiques, une seule commande</small></span></div>
+        </div>
+        <div class="hero-visual">
+          <img class="hero-photo" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=85" alt="Étals colorés de fruits et légumes frais" loading="eager">
+          <div class="hero-photo-shade"></div>
+          <div class="hero-note"><span class="note-icon">✳</span><span><strong>Le marché se rassemble</strong><small>Des vendeurs indépendants, réunis ici.</small></span></div>
+          <div class="hero-stamp"><span>Frais</span><span>local</span><span>ensemble</span></div>
+        </div>
+      </div>
+
+      <div class="benefit-strip page-wrap" aria-label="Avantages de la marketplace">
+        <div class="benefit"><span class="benefit-icon green">↗</span><span><strong>Comparez librement</strong><small>Prix et vendeurs côte à côte</small></span></div>
+        <div class="benefit"><span class="benefit-icon yellow">▤</span><span><strong>Un panier partagé</strong><small>Des sous-commandes par boutique</small></span></div>
+        <div class="benefit"><span class="benefit-icon peach">⌂</span><span><strong>Livraison ou retrait</strong><small>Frais affichés avant validation</small></span></div>
+        <div class="benefit"><span class="benefit-icon blue">✓</span><span><strong>Prix en francs congolais</strong><small>Commission vendeur de 5 %</small></span></div>
+      </div>
+
+      <section class="market-section page-wrap" id="marche" aria-labelledby="market-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">LES ÉTALS DU JOUR</p><h2 id="market-title">À découvrir au marché<span class="heading-dot">.</span></h2><p class="section-subtitle">Des vendeurs différents, réunis au même endroit.</p></div>
+          <label class="sort-select">Trier par <select id="sort-select" aria-label="Trier les produits"><option value="featured">Notre sélection</option><option value="price-asc">Prix : croissant</option><option value="price-desc">Prix : décroissant</option></select></label>
+        </div>
+        <div class="category-bar" id="category-bar" aria-label="Catégories de produits">
+          <button class="category-chip active" type="button" data-category="Tous">Tout voir <span id="all-count">0</span></button>
+          <button class="category-chip" type="button" data-category="Fruits et légumes"><span>🥬</span> Fruits & légumes</button>
+          <button class="category-chip" type="button" data-category="Poissons et produits de la mer"><span>🐟</span> Poissons & mer</button>
+          <button class="category-chip" type="button" data-category="Viandes et volailles"><span>🍗</span> Viandes & volailles</button>
+          <button class="category-chip" type="button" data-category="Céréales et produits agricoles"><span>🌾</span> Céréales & récoltes</button>
+          <button class="category-chip" type="button" data-category="Produits frais et congelés"><span>🥛</span> Frais & congelés</button>
+          <button class="category-chip" type="button" data-category="Autres produits alimentaires"><span>🍯</span> Autres produits</button>
+        </div>
+        <div class="market-feedback" id="market-feedback" aria-live="polite"></div>
+        <div class="product-grid" id="product-grid"></div>
+        <div class="empty-state hidden" id="empty-products"><span>⌕</span><h3>Aucun produit trouvé</h3><p>Essaie un autre mot ou choisis une autre catégorie.</p><button class="text-button" id="reset-filters" type="button">Réinitialiser la recherche</button></div>
+      </section>
+
+      <section class="how-section">
+        <div class="page-wrap how-layout">
+          <div class="how-copy"><p class="eyebrow">SIMPLE COMME AU MARCHÉ</p><h2>Une commande.<br><em>Plusieurs étals.</em></h2><p>Tu choisis les produits chez les vendeurs qui te conviennent. Le panier commun s’occupe de préparer une commande par boutique.</p><button class="primary-button" type="button" data-view-link="customer">Voir mon espace client</button></div>
+          <div class="steps-card">
+            <div class="step-row"><span class="step-number">01</span><div><strong>Fais ton marché</strong><p>Compare les prix et ajoute des produits de plusieurs boutiques.</p></div><span class="step-icon">🧺</span></div>
+            <div class="step-row"><span class="step-number">02</span><div><strong>Choisis comment recevoir</strong><p>Livraison ou retrait chez le vendeur. Les frais sont indiqués avant l’achat.</p></div><span class="step-icon">🚲</span></div>
+            <div class="step-row"><span class="step-number">03</span><div><strong>Valide une fois</strong><p>Ta commande générale est répartie en sous-commandes pour les vendeurs.</p></div><span class="step-icon">✓</span></div>
+            <div class="steps-footnote">Démonstration : frais de livraison indicatifs, paiement simulé.</div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="view dashboard-view page-wrap" id="view-customer" aria-labelledby="customer-title" hidden>
+      <div class="dashboard-heading"><div><p class="eyebrow">ESPACE CLIENT · DÉMO</p><h1 id="customer-title">Bonjour<span class="heading-dot">.</span></h1><p>Retrouve tes commandes et continue ton marché.</p></div><button class="primary-button" type="button" data-view-link="store">Retour au marché</button></div>
+      <div class="customer-banner"><div class="customer-avatar" id="customer-avatar">M</div><div><p class="eyebrow">TON COMPTE DE DÉMONSTRATION</p><h2 id="customer-name">Visiteur du marché</h2><p id="customer-contact">Aucun compte enregistré sur cet appareil.</p></div><button class="outline-button" id="customer-account-action" type="button">Créer mon compte démo</button></div>
+      <div class="section-heading compact-heading"><div><p class="eyebrow">TON HISTORIQUE</p><h2>Mes commandes</h2></div><span class="demo-tag">Stocké sur cet appareil</span></div>
+      <div id="customer-orders" class="order-list"></div>
+      <div class="empty-panel" id="customer-empty"><span>🧺</span><h3>Ton panier t’attend</h3><p>Explore le marché et rassemble les produits de plusieurs vendeurs.</p><button type="button" class="primary-button" data-view-link="store">Découvrir le marché</button></div>
+    </section>
+
+    <section class="view dashboard-view page-wrap" id="view-seller" aria-labelledby="seller-title" hidden>
+      <div class="dashboard-heading"><div><p class="eyebrow">ESPACE VENDEUR · DÉMO</p><h1 id="seller-title">La boutique<span class="heading-dot">.</span></h1><p>Une vue de démonstration pour gérer produits, stocks et commandes.</p></div><span class="demo-tag">Profil fictif</span></div>
+      <div class="seller-profile"><div class="seller-avatar">MG</div><div class="seller-profile-main"><p class="eyebrow">BOUTIQUE SÉLECTIONNÉE</p><h2>Chez Maman Grâce</h2><p>Matete, Kinshasa <span class="separator-dot">·</span> Profil vendeur de démonstration</p></div><div class="seller-profile-actions"><span class="verified-pill"><span>✓</span> Vendeur validé (démo)</span><button class="outline-button small-button" id="edit-seller-profile" type="button">Modifier le profil</button></div></div>
+      <div class="stat-grid" id="seller-stats"></div>
+      <div class="seller-columns">
+        <div class="panel-card seller-products-panel"><div class="panel-heading"><div><p class="eyebrow">MON CATALOGUE</p><h2>Mes produits</h2></div><button class="outline-button small-button" id="show-add-product" type="button">+ Ajouter un produit</button></div><div id="seller-products" class="seller-product-list"></div></div>
+        <div class="panel-card"><div class="panel-heading"><div><p class="eyebrow">À PRÉPARER</p><h2>Mes commandes</h2></div><span class="order-counter" id="seller-order-count">0</span></div><div id="seller-orders" class="seller-order-list"></div></div>
+      </div>
+      <div class="commission-note"><span class="commission-icon">%</span><div><strong>Commission de démonstration : 5 %</strong><p>Calculée sur le montant des produits de la sous-commande. Exemple : 30 000 FC de ventes → 1 500 FC de commission et 28 500 FC pour le vendeur, hors autres frais éventuels.</p></div></div>
+    </section>
+
+    <section class="view dashboard-view page-wrap" id="view-admin" aria-labelledby="admin-title" hidden>
+      <div class="dashboard-heading"><div><p class="eyebrow">ADMINISTRATION · DÉMO</p><h1 id="admin-title">Vue d’ensemble<span class="heading-dot">.</span></h1><p>Les chiffres ci-dessous proviennent uniquement de cette démonstration locale.</p></div><span class="demo-tag">Données locales, non partagées</span></div>
+      <div class="stat-grid admin-stat-grid" id="admin-stats"></div>
+      <div class="admin-columns"><div class="panel-card"><div class="panel-heading"><div><p class="eyebrow">ACTIVITÉ DU MARCHÉ</p><h2>Vendeurs et catalogue</h2></div></div><div id="admin-vendors" class="admin-vendor-list"></div></div><div class="panel-card"><div class="panel-heading"><div><p class="eyebrow">SUIVI GLOBAL</p><h2>Commandes récentes</h2></div></div><div id="admin-orders" class="seller-order-list"></div></div></div>
+      <div class="commission-note"><span class="commission-icon">i</span><div><strong>Un prototype, pas un espace administrateur sécurisé</strong><p>Les rôles, statistiques et commandes sont des exemples stockés dans le navigateur. La validation des vendeurs, les réclamations et les paiements réels demandent un serveur sécurisé.</p></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="page-wrap footer-inner"><a class="brand footer-brand" href="#accueil" data-view-link="store"><span class="brand-mark">mf</span><span class="brand-copy"><strong>marché<span>frais</span></strong><small>LE MARCHÉ À PORTÉE DE MAIN</small></span></a><p>Un projet de marketplace alimentaire multi-vendeurs.<br><span>Démo locale · Aucun paiement réel · Aucun service Google connecté</span></p><button type="button" class="footer-link" data-view-link="admin">À propos du prototype</button></div></footer>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-labelledby="cart-title" aria-hidden="true">
+    <div class="drawer-header"><div><p class="eyebrow">UN SEUL PANIER</p><h2 id="cart-title">Mon marché</h2></div><button class="close-button" id="close-cart" type="button" aria-label="Fermer le panier">×</button></div>
+    <div class="drawer-scroll"><div class="cart-empty" id="cart-empty"><span>🧺</span><h3>Ton panier est vide</h3><p>Ajoute tes produits préférés depuis les étals.</p><button class="text-button" id="browse-market" type="button">Retourner au marché</button></div><div id="cart-lines"></div>
+      <div class="checkout-options hidden" id="checkout-options">
+        <div class="checkout-section-title"><span>01</span><strong>Comment veux-tu recevoir ta commande ?</strong></div>
+        <label class="choice-card"><input type="radio" name="delivery-mode" value="delivery" checked><span class="choice-mark"></span><span class="choice-text"><strong>Livraison à domicile</strong><small>Frais indicatifs de 2 500 FC par vendeur</small></span><span class="choice-icon">⌂</span></label>
+        <label class="choice-card"><input type="radio" name="delivery-mode" value="pickup"><span class="choice-mark"></span><span class="choice-text"><strong>Retrait chez le vendeur</strong><small>Retrait séparé auprès de chaque boutique</small></span><span class="choice-icon">↗</span></label>
+        <label class="field-label address-field" id="address-field">Adresse de livraison<textarea id="delivery-address" rows="2" placeholder="Quartier, commune, repère…"></textarea></label>
+        <div class="checkout-section-title payment-heading"><span>02</span><strong>Mode de paiement (simulé)</strong></div>
+        <label class="select-label"><span class="sr-only">Mode de paiement de démonstration</span><select id="payment-method"><option value="Mobile Money (simulation)">Mobile Money (simulation)</option><option value="Paiement à la livraison (simulation)">Paiement à la livraison (simulation)</option></select><span class="select-chevron">⌄</span></label>
+        <p class="payment-note">Aucun paiement ne sera effectué. L’intégration Mobile Money est prévue pour une version ultérieure.</p>
+      </div>
+    </div>
+    <div class="drawer-footer" id="drawer-footer"><div class="price-line"><span>Sous-total produits</span><strong id="cart-subtotal">0 FC</strong></div><div class="price-line"><span>Livraison estimée</span><strong id="cart-delivery">0 FC</strong></div><div class="price-line total-line"><span>Total de la commande</span><strong id="cart-total">0 FC</strong></div><p class="drawer-commission">La commission de 5 % est prélevée sur chaque vente vendeur ; elle n’est pas ajoutée au panier.</p><button class="primary-button checkout-button" id="checkout-button" type="button" disabled>Valider la commande</button><p class="secure-note">🔒 Simulation locale · Aucun paiement réel</p></div>
+  </aside>
+
+  <dialog class="modal" id="compare-modal" aria-labelledby="compare-title"><div class="modal-header"><div><p class="eyebrow">COMPARER LES OFFRES</p><h2 id="compare-title">Même produit, plusieurs vendeurs</h2></div><button class="close-button" type="button" data-close-dialog aria-label="Fermer">×</button></div><div class="compare-content" id="compare-content"></div></dialog>
+  <dialog class="modal" id="account-modal" aria-labelledby="account-modal-title"><div class="modal-header"><div><p class="eyebrow">ESPACE CLIENT · DÉMO</p><h2 id="account-modal-title">Ton compte du marché</h2></div><button class="close-button" type="button" data-close-dialog aria-label="Fermer">×</button></div><p class="modal-description">Crée un profil de démonstration enregistré uniquement dans ce navigateur. Aucun mot de passe ni paiement n’est demandé.</p><form id="account-form" class="stack-form"><label class="field-label">Ton nom<input type="text" id="account-name" required maxlength="60" placeholder="Ex. Grâce Mbuyi"></label><label class="field-label">Téléphone (facultatif)<input type="tel" id="account-phone" maxlength="30" placeholder="Ex. +243 …"></label><button class="primary-button full-button" type="submit">Enregistrer mon profil</button></form></dialog>
+  <dialog class="modal" id="product-modal" aria-labelledby="product-modal-title"><div class="modal-header"><div><p class="eyebrow">CATALOGUE VENDEUR</p><h2 id="product-modal-title">Ajouter un produit</h2></div><button class="close-button" type="button" data-close-dialog aria-label="Fermer">×</button></div><form id="product-form" class="stack-form product-form"><label class="field-label">Nom du produit<input id="new-product-name" name="name" required maxlength="70" placeholder="Ex. Manioc frais"></label><div class="form-row"><label class="field-label">Catégorie<select id="new-product-category" name="category" required><option>Fruits et légumes</option><option>Poissons et produits de la mer</option><option>Viandes et volailles</option><option>Céréales et produits agricoles</option><option>Produits frais et congelés</option><option>Autres produits alimentaires</option></select></label><label class="field-label">Unité de vente<input id="new-product-unit" name="unit" required maxlength="24" placeholder="kg, sac, botte…"></label></div><div class="form-row"><label class="field-label">Prix en FC<input id="new-product-price" name="price" type="number" min="1" step="1" required placeholder="5000"></label><label class="field-label">Stock disponible<input id="new-product-stock" name="stock" type="number" min="0" step="1" required placeholder="10"></label></div><label class="field-label">Photo du produit<input id="new-product-photo" type="file" accept="image/*"><small class="field-help">Photo enregistrée sur cet appareil pour la démonstration (max. 700 Ko).</small></label><button class="primary-button full-button" type="submit">Ajouter à ma boutique</button></form></dialog>
+  <dialog class="modal" id="receipt-modal" aria-labelledby="receipt-title"><div class="receipt-success"><span class="success-mark">✓</span><p class="eyebrow">COMMANDE DE DÉMONSTRATION</p><h2 id="receipt-title">C’est noté !</h2><p class="modal-description">Une commande générale a été créée et répartie par vendeur.</p></div><div id="receipt-content" class="receipt-content"></div><div class="receipt-actions"><button class="outline-button" type="button" data-close-dialog>Continuer mes achats</button><button class="primary-button" type="button" id="track-order-button">Suivre ma commande</button></div></dialog>
+  <dialog class="modal" id="profile-modal" aria-labelledby="profile-modal-title"><div class="modal-header"><div><p class="eyebrow">BOUTIQUE DE DÉMONSTRATION</p><h2 id="profile-modal-title">Profil vendeur</h2></div><button class="close-button" type="button" data-close-dialog aria-label="Fermer">×</button></div><p class="modal-description">Le profil affiché est fictif. Dans la vraie plateforme, les coordonnées vendeur seront validées avant publication.</p><div class="profile-detail"><span>Nom commercial</span><strong>Chez Maman Grâce</strong><span>Localisation</span><strong>Matete, Kinshasa</strong><span>Statut de démonstration</span><strong>Vendeur actif</strong></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <template id="product-card-template">
+    <article class="product-card">
+      <div class="product-image-wrap"><img class="product-image" alt="" loading="lazy"><div class="image-placeholder" aria-hidden="true"></div><span class="product-badge"></span><button class="compare-button" type="button" aria-label="Comparer les vendeurs">Comparer</button></div>
+      <div class="product-card-body"><div class="product-category"></div><h3 class="product-name"></h3><div class="product-seller"><span class="seller-dot"></span><span class="seller-name"></span><span class="seller-location"></span></div><div class="product-card-bottom"><p class="product-price"></p><button class="add-button" type="button" aria-label="Ajouter au panier">+</button></div><div class="product-stock"></div></div>
+    </article>
+  </template>
+
+  <template id="order-card-template">
+    <article class="order-card"><div class="order-card-top"><span class="order-id"></span><span class="order-status"></span></div><div class="order-card-main"><div><strong class="order-vendors"></strong><small class="order-date"></small></div><strong class="order-total"></strong></div><div class="order-tracking"></div></article>
+  </template>
+</body>
+</html>
+

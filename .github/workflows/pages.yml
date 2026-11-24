@@ -1,0 +1,32 @@
+name: Publier la démo sur GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le projet
+        uses: actions/checkout@v6
+      - name: Préparer GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Préparer les fichiers du site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+      - name: Publier la démo
+        id: deployment
+        uses: actions/deploy-pages@v4
